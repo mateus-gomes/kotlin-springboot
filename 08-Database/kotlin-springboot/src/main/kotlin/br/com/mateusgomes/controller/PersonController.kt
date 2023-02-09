@@ -1,5 +1,6 @@
 package br.com.mateusgomes.controller
 
+import br.com.mateusgomes.data.vo.v1.PersonVO
 import br.com.mateusgomes.model.Person
 import br.com.mateusgomes.service.PersonService
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,35 +15,35 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/persons")
 class PersonController {
 
     @Autowired
     private lateinit var personService: PersonService
 
     @GetMapping
-    fun findAll(): List<Person> {
+    fun findAll(): List<PersonVO> {
         return personService.findAll()
     }
 
     @GetMapping(value = ["/{id}"])
     fun findById(
         @PathVariable(value = "id") id: Long
-    ): Person {
+    ): PersonVO {
         return personService.findById(id)
     }
 
     @PostMapping
     fun create(
-        @RequestBody person: Person
-    ): Person {
+        @RequestBody person: PersonVO
+    ): PersonVO {
         return personService.create(person)
     }
 
     @PutMapping
     fun update(
-        @RequestBody person: Person
-    ): Person {
+        @RequestBody person: PersonVO
+    ): PersonVO {
         return personService.update(person)
     }
 
